@@ -26,4 +26,6 @@ go install github.com/grpc-ecosystem/protoc-gen-grpc-gateway-ts
 #   docker run --volume "$(pwd):/workspace" --workdir /workspace bufbuild/buf generate
 # fi
   
+go get github.com/grpc-ecosystem/protoc-gen-grpc-gateway-ts
+
 buf generate

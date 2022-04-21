@@ -10,5 +10,7 @@ plugins:
     out: proto/echo
     opt: paths=source_relative
   - name: grpc-gateway-ts
-    out: proto/echo
+    out: proto/echo/ts
     opt: paths=source_relative
+  - name: openapiv2
+    out: proto/openapi
