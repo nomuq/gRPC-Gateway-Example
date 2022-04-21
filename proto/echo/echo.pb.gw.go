@@ -36,14 +36,6 @@ func request_Echo_Echo_0(ctx context.Context, marshaler runtime.Marshaler, clien
 	var protoReq emptypb.Empty
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
 	msg, err := client.Echo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -52,14 +44,6 @@ func request_Echo_Echo_0(ctx context.Context, marshaler runtime.Marshaler, clien
 func local_request_Echo_Echo_0(ctx context.Context, marshaler runtime.Marshaler, server EchoServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq emptypb.Empty
 	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
 
 	msg, err := server.Echo(ctx, &protoReq)
 	return msg, metadata, err
@@ -72,7 +56,7 @@ func local_request_Echo_Echo_0(ctx context.Context, marshaler runtime.Marshaler,
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterEchoHandlerFromEndpoint instead.
 func RegisterEchoHandlerServer(ctx context.Context, mux *runtime.ServeMux, server EchoServer) error {
 
-	mux.Handle("POST", pattern_Echo_Echo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Echo_Echo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -137,7 +121,7 @@ func RegisterEchoHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.
 // "EchoClient" to call the correct interceptors.
 func RegisterEchoHandlerClient(ctx context.Context, mux *runtime.ServeMux, client EchoClient) error {
 
-	mux.Handle("POST", pattern_Echo_Echo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Echo_Echo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)

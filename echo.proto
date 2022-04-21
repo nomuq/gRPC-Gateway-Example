@@ -7,12 +7,10 @@ option go_package = "github.com/msatishbabariya/gRPC-Gateway-Example;echo";
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 
-
 service Echo {
     rpc Echo(google.protobuf.Empty) returns (google.protobuf.Empty) {
       option (google.api.http) = {
-        post: "/v1/example/echo"
-        body: "*"
+        get: "/v1/example/echo"
       };
     }
 }
