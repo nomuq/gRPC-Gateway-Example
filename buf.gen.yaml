@@ -9,3 +9,6 @@ plugins:
   - name: grpc-gateway
     out: proto/echo
     opt: paths=source_relative
+  - name: grpc-gateway-ts
+    out: proto/echo
+    opt: paths=source_relative

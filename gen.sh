@@ -16,8 +16,10 @@ if ! which protoc-gen-go > /dev/null; then
   go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
   go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
   go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
+  go install github.com/grpc-ecosystem/protoc-gen-grpc-gateway-ts
 fi
 
+go install github.com/grpc-ecosystem/protoc-gen-grpc-gateway-ts
 # if ! which buf > /dev/null; then
 #   echo "Buf not found in PATH."
 #   echo "Using Docker"
